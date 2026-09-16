@@ -1,0 +1,27 @@
+# Local state and backups
+backups/
+state/
+*.local.*
+
+# Credentials and secrets
+credentials*
+auth*
+**/credentials*
+**/auth*
+*.token
+*.secret
+*.key
+*.pem
+*.p12
+.env
+.env.*
+!.env.example
+**/.codex/
+**/.claude/
+**/.config/
+**/.cache/
+**/sessions/
+
+# PowerShell/test artifacts
+*.log
+TestResults/

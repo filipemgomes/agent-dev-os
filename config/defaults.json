@@ -1,0 +1,8 @@
+{
+  "infrastructureRoot": "%USERPROFILE%\\.dev-agent",
+  "projectRoot": "C:\\dev",
+  "orchestrator": "oh-my-openagent",
+  "contextMode": true,
+  "context7": true,
+  "ruleSyncTargets": ["opencode", "claudecode", "codexcli"]
+}

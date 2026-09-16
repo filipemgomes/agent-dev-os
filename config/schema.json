@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "infrastructureRoot": {"type": "string"},
+    "projectRoot": {"type": "string"},
+    "orchestrator": {"const": "oh-my-openagent"},
+    "contextMode": {"type": "boolean"},
+    "context7": {"type": "boolean"},
+    "ruleSyncTargets": {"type": "array", "items": {"enum": ["opencode", "claudecode", "codexcli"]}}
+  },
+  "required": ["infrastructureRoot", "projectRoot", "orchestrator"]
+}

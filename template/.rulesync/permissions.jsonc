@@ -1,0 +1,4 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dyoshikawa/rulesync/main/schemas/permissions.schema.json",
+  "permissions": {}
+}

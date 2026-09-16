@@ -1,0 +1,16 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  powershell:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse scripts
+        shell: pwsh
+        run: Get-ChildItem -Recurse -Filter *.ps1 | ForEach-Object { [scriptblock]::Create((Get-Content -Raw $_.FullName)) | Out-Null }
+      - name: Secret scan
+        shell: pwsh
+        run: $pattern = 'sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|' + [regex]::Escape(('C:' + '\Users\')); if (Get-ChildItem -Recurse -Force -File | Where-Object {$_.FullName -notmatch '\\.git\\'} | Select-String -Pattern $pattern -ErrorAction SilentlyContinue) { throw 'Potential secret or personal path found' }
+      - name: Template checks
+        shell: pwsh
+        run: ./tests/run.ps1

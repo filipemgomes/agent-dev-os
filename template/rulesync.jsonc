@@ -1,0 +1,4 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dyoshikawa/rulesync/main/schemas/rulesync.schema.json",
+  "features": ["rules", "skills", "subagents", "mcp", "hooks", "permissions", "checks"]
+}
