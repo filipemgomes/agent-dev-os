@@ -37,6 +37,29 @@ opencode
 Use `continue` or any natural instruction. Run `agentdev doctor` to inspect the
 installation.
 
+## Update an existing installation
+
+From the local clone of this repository, pull the latest `main`, run the update,
+and verify the installation:
+
+```powershell
+cd C:\caminho\para\agent-dev-os
+git switch main
+git pull origin main
+.\update.ps1
+agentdev doctor
+```
+
+`update.ps1` reapplies the repository's controlled Agent Dev OS files to
+`%USERPROFILE%\.dev-agent`, including the universal project template. Before an
+existing controlled template is replaced, it is copied to
+`%USERPROFILE%\.dev-agent\backups\<timestamp>`.
+
+This means new `newdev` projects receive the latest canonical rules, skills and
+MCP configuration after an update. Existing application repositories are not
+silently rewritten; update their agent files deliberately if you want them to
+adopt newer template behavior.
+
 ## UI/Product design layer
 
 Frontend and UI work automatically activates the canonical `ui-product-design`
@@ -56,13 +79,6 @@ Component libraries are treated as implementation sources, not design
 authorities. The canonical skill explicitly blocks common generic/AI-looking UI
 patterns and requires rendered browser verification before material UI work is
 considered complete.
-
-To apply upstream changes to an existing Agent Dev OS installation, pull this
-repository and run:
-
-```powershell
-.\update.ps1
-```
 
 ## What it does not do
 

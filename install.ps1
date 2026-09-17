@@ -36,14 +36,13 @@ if (!(Has-Command opencode)) { npm install -g opencode-ai }
 if (!(Has-Command rulesync)) { npm install -g rulesync }
 if (!(Has-Command context-mode)) { npm install -g context-mode }
 
+$sourceTemplate = Join-Path $RepoRoot 'template'
 $installedTemplate = Join-Path $InfrastructureRoot 'template'
-New-Item -ItemType Directory -Force $installedTemplate | Out-Null
-Get-ChildItem -LiteralPath (Join-Path $RepoRoot 'template') -Force -Recurse | ForEach-Object {
-  $relative = $_.FullName.Substring((Join-Path $RepoRoot 'template').Length).TrimStart('\')
-  $target = Join-Path $installedTemplate $relative
-  if ($_.PSIsContainer) { New-Item -ItemType Directory -Force $target | Out-Null }
-  elseif (!(Test-Path -LiteralPath $target)) { Copy-Item -LiteralPath $_.FullName -Destination $target -Force }
+if (Test-Path -LiteralPath $installedTemplate) {
+  Backup-IfPresent $installedTemplate
+  Remove-Item -LiteralPath $installedTemplate -Recurse -Force
 }
+Copy-Item -LiteralPath $sourceTemplate -Destination $installedTemplate -Recurse -Force
 
 $oc = Join-Path $env:USERPROFILE '.config\opencode\opencode.json'
 Backup-IfPresent $oc
