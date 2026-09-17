@@ -11,6 +11,10 @@ $ok = (Row 'Context Mode' (C context-mode 'install context-mode')) -and $ok
 $ok = (Row Context7 ([bool]($ocText -match 'context7') -or (Test-Path (Join-Path $env:USERPROFILE '.omo\omo.jsonc'))) 'enable through OMO/OpenCode') -and $ok
 $ok = (Row RuleSync (C rulesync 'install RuleSync')) -and $ok
 $ok = (Row Template (Test-Path (Join-Path $InfrastructureRoot 'template\.agent\current.json')) 'restore template') -and $ok
+$uiSkill=Join-Path $InfrastructureRoot 'template\.rulesync\skills\ui-product-design\SKILL.md'
+$ok = (Row 'UI Product' (Test-Path $uiSkill) 'rerun install.ps1/update.ps1') -and $ok
+$mcpPath=Join-Path $InfrastructureRoot 'template\.rulesync\mcp.jsonc'; $mcpText=if(Test-Path $mcpPath){Get-Content -Raw $mcpPath}else{''}
+$ok = (Row 'shadcn MCP' ([bool]($mcpText -match '"shadcn"')) 'rerun install.ps1/update.ps1') -and $ok
 $path=[Environment]::GetEnvironmentVariable('Path','User'); $bin=Join-Path $InfrastructureRoot 'bin'
 $ok = (Row PATH ((@($path -split ';')|Where-Object {$_ -eq $bin}).Count -eq 1) 'add .dev-agent\bin once') -and $ok
 $activeConfigs=@($oc,(Join-Path $env:USERPROFILE '.omo\omo.jsonc')) | Where-Object {Test-Path -LiteralPath $_}
