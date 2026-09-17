@@ -8,16 +8,23 @@ providers remain available as executors.
 
 ## Install
 
+On a new Windows machine, install Git, Node.js/npm, and use PowerShell.
+
 ```powershell
-git clone <repo>
+git clone https://github.com/filipemgomes/agent-dev-os.git
 cd agent-dev-os
 .\install.ps1
 ```
 
-Then:
+Close and reopen PowerShell so the installed `newdev` and `agentdev` commands
+are available on the updated user PATH. Then check the installation and create
+a project:
 
 ```powershell
-newdev minha-ideia
+agentdev doctor
+newdev minha-ideia -NoOpen
+cd C:\dev\minha-ideia
+opencode
 ```
 
 For an existing project:
