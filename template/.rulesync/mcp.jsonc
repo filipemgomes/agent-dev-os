@@ -1,4 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/dyoshikawa/rulesync/main/schemas/mcp.schema.json",
-  "mcpServers": {}
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    }
+  }
 }
