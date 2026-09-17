@@ -60,6 +60,29 @@ MCP configuration after an update. Existing application repositories are not
 silently rewritten; update their agent files deliberately if you want them to
 adopt newer template behavior.
 
+## Matt Pocock engineering workflow
+
+The installer provisions the complete `mattpocock/skills` collection for
+Claude Code, Codex and OpenCode. The collection is intentionally composable:
+user-invoked workflows orchestrate work, while model-invoked skills provide
+reusable engineering discipline only when the task fits.
+
+Recommended project flow:
+
+1. Run `/setup-matt-pocock-skills` once per repository to configure issue
+   tracking, triage labels and documentation location.
+2. For a new feature, ambiguous product change, architecture change or other
+   substantial behavior change, use `/grill-with-docs` before implementation.
+   Existing frozen decisions should be reused instead of re-grilled.
+3. Use `/to-spec` once the design is aligned.
+4. Use `/to-tickets` when the work benefits from tracer-bullet decomposition.
+5. Use `/implement` for spec-driven execution. TDD, domain modeling, code
+   review, bug diagnosis and other model-invoked skills are available as needed.
+
+The universal RuleSync workflow encodes the same default: grill substantial
+ambiguous work first, but do not force an interview when canonical project docs
+already settle the decision or the user explicitly asks to skip it.
+
 ## UI/Product design layer
 
 Frontend and UI work automatically activates the canonical `ui-product-design`
@@ -90,6 +113,7 @@ considered complete.
 ## Acknowledgements
 
 Agent Dev OS bootstraps OpenCode, Oh My OpenAgent, Context Mode, Context7,
-RuleSync, Impeccable, shadcn MCP, Vercel agent skills, 21st.dev agent skills,
-and Agent Skills-compatible workflows. Each upstream project keeps its own
-license and runtime; this repository does not copy their code.
+RuleSync, the Matt Pocock engineering skills collection, Impeccable, shadcn MCP,
+Vercel agent skills, 21st.dev agent skills, and Agent Skills-compatible
+workflows. Each upstream project keeps its own license and runtime; this
+repository does not copy their code.

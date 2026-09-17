@@ -13,6 +13,9 @@ $ok = (Row RuleSync (C rulesync 'install RuleSync')) -and $ok
 $ok = (Row Template (Test-Path (Join-Path $InfrastructureRoot 'template\.agent\current.json')) 'restore template') -and $ok
 $uiSkill=Join-Path $InfrastructureRoot 'template\.rulesync\skills\ui-product-design\SKILL.md'
 $ok = (Row 'UI Product' (Test-Path $uiSkill) 'rerun install.ps1/update.ps1') -and $ok
+$mattRoot=Join-Path $InfrastructureRoot 'template\.agents\skills'
+$mattOk=(Test-Path (Join-Path $mattRoot 'setup-matt-pocock-skills\SKILL.md')) -and (Test-Path (Join-Path $mattRoot 'grill-with-docs\SKILL.md')) -and (Test-Path (Join-Path $mattRoot 'domain-modeling\SKILL.md'))
+$ok = (Row 'Matt Skills' $mattOk 'rerun install.ps1/update.ps1') -and $ok
 $mcpPath=Join-Path $InfrastructureRoot 'template\.rulesync\mcp.jsonc'; $mcpText=if(Test-Path $mcpPath){Get-Content -Raw $mcpPath}else{''}
 $ok = (Row 'shadcn MCP' ([bool]($mcpText -match '"shadcn"')) 'rerun install.ps1/update.ps1') -and $ok
 $path=[Environment]::GetEnvironmentVariable('Path','User'); $bin=Join-Path $InfrastructureRoot 'bin'

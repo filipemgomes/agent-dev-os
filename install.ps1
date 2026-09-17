@@ -78,6 +78,10 @@ try {
 
   npx --yes skills add 21st-dev/skill --skill 21st-cli-use --skill 21st-ui-build --skill 21st-ui-explore --skill 21st-ui-review --agent claude-code codex opencode --yes --copy
   Assert-ExternalInstall '21st.dev UI skills'
+
+  Write-Output 'Installing Matt Pocock engineering workflow skills...'
+  npx --yes skills@latest add mattpocock/skills --skill '*' --agent claude-code codex opencode --yes --copy
+  Assert-ExternalInstall 'Matt Pocock skills'
 }
 finally { Pop-Location }
 
